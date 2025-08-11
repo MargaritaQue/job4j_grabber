@@ -12,7 +12,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Main {
-    private static final Logger log = LoggerFactory.getLogger(Main.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) throws ClassNotFoundException {
         var config = new Config();
@@ -32,7 +32,7 @@ public class Main {
                     store);
             Thread.sleep(10000);
         } catch (SQLException e) {
-            log.error("When create a connection", e);
+            LOG.error("When create a connection", e);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

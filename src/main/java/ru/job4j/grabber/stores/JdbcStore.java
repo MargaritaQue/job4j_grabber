@@ -19,7 +19,7 @@ public class JdbcStore implements Store {
 
     @Override
     public void save(Post post) {
-        try {PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO posts (name, text, link, created) VALUES (?, ?, ?, ?)"); {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO posts (name, text, link, created) VALUES (?, ?, ?, ?)")) {
             preparedStatement.setString(1, post.getTitle());
             preparedStatement.setString(2, post.getDescription());
             preparedStatement.setString(3, post.getLink());
@@ -30,7 +30,6 @@ public class JdbcStore implements Store {
                     post.setId(generatedKeys.getLong(1));
                 }
             }
-        }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
