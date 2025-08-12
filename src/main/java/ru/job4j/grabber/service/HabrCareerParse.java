@@ -19,27 +19,29 @@ public class HabrCareerParse implements Parse {
     public List<Post> fetch() {
         var result = new ArrayList<Post>();
         try {
-            int pageNumber = 1;
-            String fullLink = "%s%s%d%s".formatted(SOURCE_LINK, PREFIX, pageNumber, SUFFIX);
-            var connection = Jsoup.connect(fullLink);
-            var document = connection.get();
-            var rows = document.select(".vacancy-card__inner");
-            rows.forEach(row -> {
-                var titleElement = row.select(".vacancy-card__title").first();
-                var linkElement = titleElement.child(0);
-                var timeElement = row.select(".vacancy-card__date > time");
-                String vacancyName = titleElement.text();
-                String link = String.format("%s%s", SOURCE_LINK,
-                        linkElement.attr("href"));
-                String datetimeStr = timeElement.attr("datetime");
-                long epochMillis = ZonedDateTime.parse(datetimeStr).toInstant().toEpochMilli();
-                var post = new Post();
-                post.setTitle(vacancyName);
-                post.setLink(link);
-                post.setTime(epochMillis);
-                result.add(post);
-                System.out.printf("%s, %s %s%n", vacancyName, link, epochMillis);
-            });
+            for (int i = 1; i < 6; i++) {
+                String fullLink = "%s%s%d%s".formatted(SOURCE_LINK, PREFIX, i, SUFFIX);
+                var connection = Jsoup.connect(fullLink);
+                var document = connection.get();
+                var rows = document.select(".vacancy-card__inner");
+                rows.forEach(row -> {
+                    var titleElement = row.select(".vacancy-card__title").first();
+                    var linkElement = titleElement.child(0);
+                    var timeElement = row.select(".vacancy-card__date > time");
+                    String vacancyName = titleElement.text();
+                    String link = String.format("%s%s", SOURCE_LINK,
+                            linkElement.attr("href"));
+                    String datetimeStr = timeElement.attr("datetime");
+                    long epochMillis = ZonedDateTime.parse(datetimeStr).toInstant().toEpochMilli();
+                    var post = new Post();
+                    post.setTitle(vacancyName);
+                    post.setLink(link);
+                    post.setTime(epochMillis);
+                    result.add(post);
+                    System.out.printf("%s, %s %s%n", vacancyName, link, epochMillis);
+                });
+            }
+
         } catch (IOException e) {
             LOG.error("When load page", e);
         }
