@@ -22,7 +22,6 @@ public class HabrCareerParse implements Parse {
         this.dateTimeParser = dateTimeParser;
     }
 
-
     @Override
     public List<Post> fetch(String link) {
         var result = new ArrayList<Post>();
