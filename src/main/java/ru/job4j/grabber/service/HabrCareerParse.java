@@ -48,8 +48,20 @@ public class HabrCareerParse implements Parse {
         return result;
     }
 
+    private String retrieveDescription(String link) {
+        try {
+            var connection = Jsoup.connect(link);
+            var document = connection.get();
+            var descriptionElement = document.select(".faded-content");
+            return descriptionElement.text();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static void main(String[] args) {
         HabrCareerParse habrCareerParse = new HabrCareerParse();
         habrCareerParse.fetch();
+
     }
 }
