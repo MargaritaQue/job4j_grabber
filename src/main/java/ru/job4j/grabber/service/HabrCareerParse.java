@@ -3,7 +3,7 @@ package ru.job4j.grabber.service;
 import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import ru.job4j.grabber.model.Post;
-import ru.job4j.grabber.utils.DateTimeParser;
+import ru.job4j.grabber.util.DateTimeParser;
 
 import java.io.IOException;
 import java.time.ZoneOffset;
@@ -48,7 +48,6 @@ public class HabrCareerParse implements Parse {
                 post.setTime(second);
                 post.setDescription(description);
                 result.add(post);
-                System.out.printf("%s %s %s%n %s%n", vacancyName, postLink, second, description);
             });
 
         } catch (IOException e) {

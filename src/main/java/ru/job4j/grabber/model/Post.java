@@ -35,6 +35,17 @@ public class Post {
     }
 
     @Override
+    public String toString() {
+        return "Post{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", link='" + link + '\'' +
+                ", description='" + description + '\'' +
+                ", time=" + time +
+                '}';
+    }
+
+    @Override
     public int hashCode() {
         return Objects.hashCode(link);
     }

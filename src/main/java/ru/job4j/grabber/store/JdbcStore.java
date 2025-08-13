@@ -1,4 +1,4 @@
-package ru.job4j.grabber.stores;
+package ru.job4j.grabber.store;
 
 import ru.job4j.grabber.model.Post;
 
@@ -19,7 +19,7 @@ public class JdbcStore implements Store {
 
     @Override
     public void save(Post post) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO posts (name, text, link, created) VALUES (?, ?, ?, ?)")) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO post (name, text, link, created) VALUES (?, ?, ?, ?)")) {
             preparedStatement.setString(1, post.getTitle());
             preparedStatement.setString(2, post.getDescription());
             preparedStatement.setString(3, post.getLink());

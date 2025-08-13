@@ -5,4 +5,5 @@ import java.util.List;
 
 public interface Parse {
     List<Post> fetch(String link);
+    List<Post> fetch();
 }

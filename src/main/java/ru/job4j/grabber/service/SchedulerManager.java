@@ -3,7 +3,7 @@ package ru.job4j.grabber.service;
 import org.apache.log4j.Logger;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
-import ru.job4j.grabber.stores.Store;
+import ru.job4j.grabber.store.Store;
 import static org.quartz.JobBuilder.newJob;
 import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
 import static org.quartz.TriggerBuilder.newTrigger;
